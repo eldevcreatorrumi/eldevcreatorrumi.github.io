@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка безопасности | ELDEVCREATOR RU</title>
+    <link rel="stylesheet" href="antibot.css">
+</head>
+<body>
+    <div class="antibot-container">
+        <div class="antibot-logo">🛡️</div>
+        <h1 class="antibot-title">Проверка безопасности</h1>
+        <p class="antibot-subtitle">Пожалуйста, подтвердите, что вы не робот</p>
+        
+        <div class="antibot-form">
+            <div class="checkbox-container" id="checkboxContainer">
+                <div class="checkbox" id="checkbox"></div>
+                <span class="checkbox-text">Я не робот</span>
+            </div>
+            
+            <div class="color-selection">
+                <div class="color-title" id="colorTitle">Выберите цвет:</div>
+                <div class="color-options">
+                    <div class="color-option color-red" data-color="red"></div>
+                    <div class="color-option color-blue" data-color="blue"></div>
+                    <div class="color-option color-green" data-color="green"></div>
+                    <div class="color-option color-yellow" data-color="yellow"></div>
+                    <div class="color-option color-purple" data-color="purple"></div>
+                    <div class="color-option color-orange" data-color="orange"></div>
+                </div>
+                <button class="refresh-button" id="refreshButton">🔄 Сменить цвет</button>
+            </div>
+            
+            <button class="verify-button" id="verifyButton" disabled>
+                Проверить
+            </button>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Проверка...</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                Пожалуйста, отметьте галочку и выберите правильный цвет
+            </div>
+        </div>
+    </div>
+
+    <script src="antibot.js"></script>
+</body>
+</html> 
