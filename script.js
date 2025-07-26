@@ -117,4 +117,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   updateServerStatus();
   setInterval(updateServerStatus, 30000);
+
+  const copyBtn = document.getElementById('copy-ip-btn');
+  const ipSpan = document.getElementById('server-ip');
+  if (copyBtn && ipSpan) {
+    copyBtn.addEventListener('click', function() {
+      const ip = ipSpan.textContent.trim();
+      navigator.clipboard.writeText(ip).then(() => {
+        copyBtn.textContent = '✔';
+        setTimeout(() => {
+          copyBtn.textContent = '📋';
+        }, 1200);
+      });
+    });
+  }
 }); 
