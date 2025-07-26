@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const antibotPassed = sessionStorage.getItem('antibotPassed');
     
     if (antibotPassed !== 'true' && !window.location.pathname.includes('antibot')) {
-        window.location.href = '/antibot';
+        window.location.href = '/antibot.html';
         return;
     }
     
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const serverCard = document.querySelector('.rw-server-card');
         if (!serverCard) return;
 
-        fetch(`https://api.mcsrvstat.us/3/${serverIP}`)
+        fetch('https://apieldevcreatorrumi.vercel.app/api/status')
             .then(res => res.json())
             .then(data => {
                 if (!data.online) {
