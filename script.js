@@ -2,18 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const antibotPassed = sessionStorage.getItem('antibotPassed');
     
     if (antibotPassed !== 'true' && !window.location.pathname.includes('antibot')) {
-        window.location.href = '/antibot.html';
+        window.location.href = '/antibot';
         return;
     }
     
     const sections = document.querySelectorAll('.section-content');
-    const navLinks = document.querySelectorAll('.rw-nav a');
+  const navLinks = document.querySelectorAll('.rw-nav a');
+
+  function showSection(sectionId) {
+    sections.forEach(section => {
+      section.style.display = 'none';
+    });
     
-    function showSection(sectionId) {
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        
         const targetSection = document.querySelector(sectionId);
         if (targetSection) {
             targetSection.style.display = 'block';
@@ -49,16 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
             showSection(hash);
             setTimeout(() => {
                 const targetSection = document.querySelector(hash);
-                if (targetSection) {
+    if (targetSection) {
                     targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
+    }
             }, 100);
         } else {
             showSection('#hero');
             if (window.location.hash === '#hero') {
                 window.history.replaceState({}, '', '/');
-            }
-        }
+    }
+  }
     }
     
     window.addEventListener('hashchange', function() {
@@ -73,48 +73,48 @@ document.addEventListener('DOMContentLoaded', function() {
     
     handleInitialNavigation();
     
-    const serverIP = '212.21.15.122:10000';
+  const serverIP = '212.21.15.122:10000';
 
-    function updateServerStatus() {
-        const serverCard = document.querySelector('.rw-server-card');
-        if (!serverCard) return;
+  function updateServerStatus() {
+    const serverCard = document.querySelector('.rw-server-card');
+    if (!serverCard) return;
 
-        fetch('https://apieldevcreatorrumi.vercel.app/api/status')
-            .then(res => res.json())
-            .then(data => {
-                if (!data.online) {
-                    serverCard.innerHTML = `
-                        <div class="rw-server-icon">★</div>
-                        <div class="rw-server-info">
-                            <div class="rw-server-title">НАШ СЕРВЕР</div>
-                            <div class="rw-server-status">ОФФЛАЙН</div>
-                        </div>
-                        <div class="rw-server-ip">${serverIP}</div>
-                    `;
-                    return;
-                }
-                
-                serverCard.innerHTML = `
-                    <div class="rw-server-icon">★</div>
-                    <div class="rw-server-info">
-                        <div class="rw-server-title">НАШ СЕРВЕР</div>
-                        <div class="rw-server-status">ОНЛАЙН: ${data.players.online} / ${data.players.max}</div>
-                    </div>
-                    <div class="rw-server-ip">${serverIP}</div>
-                `;
-            })
-            .catch(() => {
-                serverCard.innerHTML = `
-                    <div class="rw-server-icon">★</div>
-                    <div class="rw-server-info">
-                        <div class="rw-server-title">НАШ СЕРВЕР</div>
-                        <div class="rw-server-status">Ошибка загрузки</div>
-                    </div>
-                    <div class="rw-server-ip">${serverIP}</div>
-                `;
-            });
-    }
+    fetch(`https://api.mcsrvstat.us/3/${serverIP}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.online) {
+          serverCard.innerHTML = `
+            <div class="rw-server-icon">★</div>
+            <div class="rw-server-info">
+              <div class="rw-server-title">НАШ СЕРВЕР</div>
+              <div class="rw-server-status">ОФФЛАЙН</div>
+            </div>
+            <div class="rw-server-ip">${serverIP}</div>
+          `;
+          return;
+        }
+        
+        serverCard.innerHTML = `
+          <div class="rw-server-icon">★</div>
+          <div class="rw-server-info">
+            <div class="rw-server-title">НАШ СЕРВЕР</div>
+            <div class="rw-server-status">ОНЛАЙН: ${data.players.online} / ${data.players.max}</div>
+          </div>
+          <div class="rw-server-ip">${serverIP}</div>
+        `;
+      })
+      .catch(() => {
+        serverCard.innerHTML = `
+          <div class="rw-server-icon">★</div>
+          <div class="rw-server-info">
+            <div class="rw-server-title">НАШ СЕРВЕР</div>
+            <div class="rw-server-status">Ошибка загрузки</div>
+          </div>
+          <div class="rw-server-ip">${serverIP}</div>
+        `;
+      });
+  }
 
-    updateServerStatus();
-    setInterval(updateServerStatus, 30000);
+  updateServerStatus();
+  setInterval(updateServerStatus, 30000);
 }); 
